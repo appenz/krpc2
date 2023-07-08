@@ -52,8 +52,39 @@ Also check out the [contribution guide](https://github.com/krpc/krpc/blob/main/C
 ## Building on Linux
 
  * [Install Bazel](https://bazel.build/install/)
+ * Install the necessary requirements
+   *   
  * Create a symlink from `lib/ksp2` to where you have Kerbal Space Program 2 installed, so that you have `lib/ksp2/KSP_x64_Data/Managed/...`
  * Run `bazel build //:krpc2`
+ * The resulting plugin archive is placed in `bazel-bin/krpc2-VERSION.zip`
+
+## Building on Windows using Linux Subsystem for Windows (LSW)
+
+ * Install Bazel via [Bazelisk](https://github.com/bazelbuild/bazelisk). Installing Bazel directly via apt-get currently does not work
+   without additional configuration.
+ * Install Mono via  ```apt-get install mono-complete ```
+ * Create a symlink from `lib/ksp2` to where you have Kerbal Space Program 2 installed, so that you have `lib/ksp2/KSP_x64_Data/Managed/...`
+ * Run `bazel build //:krpc2`
+    * Currently this generates the following error:
+       ```
+      appenz@Dragon2022:~/dev/krpc2/ > bazelisk-linux-amd64 build //:krpc2                                               ~/dev/krpc2
+      INFO: Analyzed target //:krpc2 (0 packages loaded, 0 targets configured).
+      INFO: Found 1 target...
+      ERROR: /home/appenz/dev/krpc2/server/BUILD.bazel:6:15: Compiling server failed: missing input file '//lib:ksp2/KSP2_x64_Data/Managed/USD.NET.dll'
+      ERROR: /home/appenz/dev/krpc2/server/BUILD.bazel:6:15: Compiling server failed: missing input file '//lib:ksp2/KSP2_x64_Data/Managed/USD.NET.dll'
+      ERROR: /home/appenz/dev/krpc2/server/BUILD.bazel:6:15: Compiling server failed: missing input file '//lib:ksp2/KSP2_x64_Data/Managed/USD.NET.Unity.dll'
+      ERROR: /home/appenz/dev/krpc2/server/BUILD.bazel:6:15: Compiling server failed: missing input file '//lib:ksp2/KSP2_x64_Data/Managed/USD.NET.Unity.dll'
+      ERROR: /home/appenz/dev/krpc2/server/BUILD.bazel:6:15: Compiling server failed: missing input file '//lib:ksp2/KSP2_x64_Data/Managed/Unity.Formats.USD.Runtime.dll'
+      ERROR: /home/appenz/dev/krpc2/server/BUILD.bazel:6:15: Compiling server failed: missing input file '//lib:ksp2/KSP2_x64_Data/Managed/Unity.Formats.USD.Runtime.dll'
+      ERROR: /home/appenz/dev/krpc2/server/BUILD.bazel:6:15: Compiling server failed: 3 input file(s) do not exist
+      ERROR: /home/appenz/dev/krpc2/server/BUILD.bazel:6:15: Compiling server failed: 3 input file(s) do not exist
+      Target //:krpc2 failed to build
+      Use --verbose_failures to see the command lines of failed build steps.
+      ERROR: /home/appenz/dev/krpc2/server/BUILD.bazel:6:15 Compiling server failed: 3 input file(s) do not exist
+      INFO: Elapsed time: 0.101s, Critical Path: 0.00s
+      INFO: 1 process: 1 internal.
+      FAILED: Build did NOT complete successfully
+       ```
  * The resulting plugin archive is placed in `bazel-bin/krpc2-VERSION.zip`
 
 ## Building on Windows
